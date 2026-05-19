@@ -9,12 +9,26 @@
 }
 
 @layer base {
-  body {
-    /* Fix: Body text must be dark to be visible on white background */
-    @apply bg-brand-bg text-brand-dark antialiased overflow-x-hidden;
-  }
-  .body {
+  html {
     scroll-behavior: smooth;
+    /* Optional: Prevents layout shift when scrollbar appears */
+    scrollbar-gutter: stable; 
+  }
+  body {
+
+    @apply bg-brand-bg text-brand-dark antialiased pt-16 sm:pt-0 pb-32 sm:pb-0;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #1D2B1D;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #E4A101;
+    border-radius: 5px;
+    border: 3px solid #1D2B1D;
+  }
 }
 
-}
