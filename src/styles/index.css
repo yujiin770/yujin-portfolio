@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-dark: #1D2B1D;    /* Dark Forest Green/Black */
-  --color-brand-primary: #E4A101; /* Golden Orange */
-  --color-brand-bg: #FFFFFF;      /* Pure White Background */
+  --color-brand-dark: #1D2B1D;
+  --color-brand-primary: #E4A101;
+  --color-brand-bg: #FFFFFF;
   
   --font-sans: "Inter", ui-sans-serif, system-ui;
 }
@@ -11,12 +11,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Optional: Prevents layout shift when scrollbar appears */
-    scrollbar-gutter: stable; 
   }
+  
   body {
-
-    @apply bg-brand-bg text-brand-dark antialiased pt-16 sm:pt-0 pb-32 sm:pb-0;
+    @apply bg-brand-bg text-brand-dark antialiased overflow-x-hidden;
+  }
+  
+  #root {
+    @apply min-h-screen overflow-x-hidden;
   }
   
   ::-webkit-scrollbar {
@@ -32,3 +34,6 @@
   }
 }
 
+section {
+  scroll-margin-top: 80px;
+}

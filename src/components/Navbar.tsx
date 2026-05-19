@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Home, User, Briefcase, Mail } from 'lucide-react';
+import { Home, User, Briefcase, Mail, Code } from 'lucide-react';
 
 const navItems = [
-  { name: 'Home', id: 'home', icon: <Home size={22} /> },
-  { name: 'About', id: 'about', icon: <User size={22} /> },
-  { name: 'Work', id: 'work', icon: <Briefcase size={22} /> },
-  { name: 'Contact', id: 'contact', icon: <Mail size={22} /> },
+  { name: 'Home', id: 'home', icon: <Home size={20} /> },
+  { name: 'About', id: 'about', icon: <User size={20} /> },
+  { name: 'Tech', id: 'tech', icon: <Code size={20} /> },
+  { name: 'Work', id: 'work', icon: <Briefcase size={20} /> },
+  { name: 'Contact', id: 'contact', icon: <Mail size={20} /> },
 ];
 
 export default function Navbar() {
@@ -21,9 +22,7 @@ export default function Navbar() {
       const element = document.getElementById(id);
       if (element) {
         const offset = 80; 
-        const bodyRect = document.body.getBoundingClientRect().top;
-        const elementRect = element.getBoundingClientRect().top;
-        const elementPosition = elementRect - bodyRect;
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
         const offsetPosition = elementPosition - offset;
 
         window.scrollTo({
@@ -65,73 +64,92 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav 
-      className={`fixed left-0 w-full z-[100] transition-all duration-500 
-        /* Mobile: Bottom | Desktop: Top */
-        bottom-0 sm:bottom-auto sm:top-0 
-        ${scrolled ? 'bg-brand-dark/95 backdrop-blur-xl shadow-[0_-10px_30px_rgba(0,0,0,0.3)] sm:shadow-xl' : 'bg-brand-dark'}
-      `}
-    >
-      <div className="max-w-7xl mx-auto px-0 sm:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20 relative">
-          
-          {/* DESKTOP LOGO (Hidden on Mobile) */}
-          <div 
-            className="hidden sm:flex items-center gap-3 cursor-pointer group" 
-            onClick={() => window.scrollTo({top:0, behavior:'smooth'})}
-          >
-            <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center text-brand-dark font-black text-xl group-hover:rotate-6 transition-transform">
-              Y
+    <>
+      {/* Mobile Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 w-full z-[100] bg-brand-dark/95 backdrop-blur-xl shadow-[0_-10px_30px_rgba(0,0,0,0.3)] sm:hidden">
+        <div className="flex justify-around items-center h-16 px-4">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={(e) => handleScrollTo(e, item.id)}
+                className="relative flex flex-col items-center justify-center flex-1 py-2 group"
+              >
+                <div className={`transition-all duration-300 ${
+                  isActive ? 'text-brand-primary scale-110' : 'text-gray-400'
+                }`}>
+                  {item.icon}
+                </div>
+                <span className={`text-[10px] font-black tracking-widest transition-all duration-300 ${
+                  isActive ? 'text-brand-primary' : 'text-gray-400'
+                } mt-1`}>
+                  {item.name}
+                </span>
+                {isActive && (
+                  <motion.div 
+                    layoutId="navIndicator"
+                    className="absolute top-0 left-0 right-0 h-[3px] bg-brand-primary shadow-[0_0_15px_rgba(228,161,1,0.5)]"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+              </a>
+            );
+          })}
+        </div>
+      </nav>
+
+      {/* Desktop Top Navigation */}
+      <nav 
+        className={`fixed left-0 w-full z-[100] transition-all duration-500 hidden sm:block
+          top-0 ${scrolled ? 'bg-brand-dark/95 backdrop-blur-xl shadow-xl' : 'bg-brand-dark'}
+        `}
+      >
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="flex justify-between items-center h-20 relative">
+            {/* DESKTOP LOGO */}
+            <div 
+              className="flex items-center gap-3 cursor-pointer group" 
+              onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
+            >
+              <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center text-brand-dark font-black text-xl group-hover:rotate-6 transition-transform">
+                Y
+              </div>
+              <span className="text-white font-black tracking-tighter text-xl">
+                YUJIN<span className="text-brand-primary">.</span>
+              </span>
             </div>
-            <span className="text-white font-black tracking-tighter text-xl">
-              YUJIN<span className="text-brand-primary">.</span>
-            </span>
-          </div>
 
-          {/* NAV LINKS (Full width on mobile, centered on desktop) */}
-          <div className="flex flex-1 sm:flex-none justify-around sm:gap-12 h-full items-center">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  onClick={(e) => handleScrollTo(e, item.id)}
-                  className="relative flex-1 sm:flex-none flex flex-col sm:flex-row items-center justify-center h-full group"
-                >
-                  {/* ICON: Active color logic */}
-                  <div className={`sm:hidden transition-all duration-300 ${
-                    isActive ? 'text-brand-primary scale-110' : 'text-gray-500 group-active:scale-90'
-                  }`}>
-                    {item.icon}
-                  </div>
+            {/* NAV LINKS */}
+            <div className="flex gap-12 h-full items-center">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    onClick={(e) => handleScrollTo(e, item.id)}
+                    className="relative flex flex-col items-center justify-center h-full group"
+                  >
+                    <span className={`text-xs font-black uppercase tracking-widest transition-all duration-300 ${
+                      isActive ? 'text-brand-primary' : 'text-gray-400 group-hover:text-white'
+                    }`}>
+                      {item.name}
+                    </span>
+                    {isActive && (
+                      <motion.div 
+                        layoutId="navIndicatorDesktop"
+                        className="absolute bottom-0 left-0 right-0 h-[3px] bg-brand-primary shadow-[0_0_15px_rgba(228,161,1,0.5)]"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                  </a>
+                );
+              })}
+            </div>
 
-                  {/* TEXT LABEL */}
-                  <span className={`text-[10px] sm:text-xs font-black sm:uppercase tracking-widest transition-all duration-300 ${
-                    isActive ? 'text-brand-primary' : 'text-gray-400 sm:group-hover:text-white'
-                  } mt-1 sm:mt-0`}>
-                    {item.name}
-                  </span>
-
-                  {/* ACTIVE INDICATOR 
-                      Mobile: Top of the bar | Desktop: Bottom of the bar 
-                  */}
-                  {isActive && (
-                    <motion.div 
-                      layoutId="navIndicator"
-                      className="absolute left-0 right-0 h-[3px] bg-brand-primary 
-                        top-0 sm:top-auto sm:bottom-0 
-                        shadow-[0_0_15px_rgba(228,161,1,0.5)]"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                </a>
-              );
-            })}
-          </div>
-
-          {/* DESKTOP BUTTON (Hidden on Mobile) */}
-          <div className="hidden sm:block">
+            {/* DESKTOP BUTTON */}
             <button 
               onClick={(e) => handleScrollTo(e as any, 'contact')} 
               className="bg-brand-primary text-brand-dark px-7 py-2.5 rounded-full font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-transform"
@@ -139,9 +157,8 @@ export default function Navbar() {
               Contact Me
             </button>
           </div>
-
         </div>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
