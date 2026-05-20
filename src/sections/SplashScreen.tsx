@@ -46,5 +46,4 @@ const SplashScreen = ({ finishLoading }: { finishLoading: () => void }) => {
     </motion.div>
   );
 };
-
 export default SplashScreen;

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Layout, AppWindow, Palette } from 'lucide-react';
 
 // REMOVE the .tsx at the end of these lines
-import SectionHeader from '../components/SectionHeader'; 
+import SectionHeader from '../components/SectionHeader';
 import StatItem from '../components/StatItem';
 import ServiceCard from '../components/ServiceCard';
 
@@ -30,13 +30,13 @@ const About = () => {
     <section id="about" className="py-32 px-6 bg-brand-bg">
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
+
           <div className="lg:col-span-6 xl:col-span-7">
-            <SectionHeader 
-              number="01 // Story" 
-              title="A developer fueled by curiosity and three years of craft." 
+            <SectionHeader
+              number="01 // Story"
+              title="A developer fueled by curiosity and three years of craft."
             />
-            
+
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -45,13 +45,13 @@ const About = () => {
               className="space-y-6 text-gray-500 text-lg leading-relaxed font-medium"
             >
               <p>
-                As a freelance developer and a third-year BSIT student, I bridge the gap between 
-                <span className="text-brand-dark font-bold"> academic theory</span> and 
+                As a freelance developer and a third-year BSIT student, I bridge the gap between
+                <span className="text-brand-dark font-bold"> academic theory</span> and
                 <span className="text-brand-dark font-bold underline decoration-brand-primary decoration-4 underline-offset-4"> hands-on experience</span>.
               </p>
               <p>
-                I believe that technology should be practical and human-centered. Whether it’s building a robust 
-                database system or a sleek web interface, my goal is always to create solutions that solve real-world problems 
+                I believe that technology should be practical and human-centered. Whether it’s building a robust
+                database system or a sleek web interface, my goal is always to create solutions that solve real-world problems
                 with elegance.
               </p>
 
@@ -63,7 +63,7 @@ const About = () => {
 
               <div className="pt-8">
                 <button className="bg-brand-dark text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-brand-dark/10">
-                   Check My Resume
+                  Check My Resume
                 </button>
               </div>
             </motion.div>
@@ -71,7 +71,7 @@ const About = () => {
 
           <div className="lg:col-span-6 xl:col-span-5 flex flex-col gap-6">
             {SERVICES.map((service, i) => (
-              <ServiceCard 
+              <ServiceCard
                 key={i}
                 index={i}
                 title={service.title}

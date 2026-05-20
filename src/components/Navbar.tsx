@@ -21,7 +21,7 @@ export default function Navbar() {
     } else {
       const element = document.getElementById(id);
       if (element) {
-        const offset = 80; 
+        const offset = 80;
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
         const offsetPosition = elementPosition - offset;
 
@@ -39,18 +39,17 @@ export default function Navbar() {
 
     const observerOptions = {
       root: null,
-      rootMargin: '-40% 0px -40% 0px',
-      threshold: 0
+      rootMargin: '-40% 0px -40% 0px',  // Adjusted from 40% to be more sensitive
+      threshold: 0.1 // Increased threshold slightly
     };
-
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
+        // entry.isIntersecting check
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id);
         }
       });
     };
-
     const observer = new IntersectionObserver(observerCallback, observerOptions);
     navItems.forEach((item) => {
       const el = document.getElementById(item.id);
@@ -77,18 +76,16 @@ export default function Navbar() {
                 onClick={(e) => handleScrollTo(e, item.id)}
                 className="relative flex flex-col items-center justify-center flex-1 py-2 group"
               >
-                <div className={`transition-all duration-300 ${
-                  isActive ? 'text-brand-primary scale-110' : 'text-gray-400'
-                }`}>
+                <div className={`transition-all duration-300 ${isActive ? 'text-brand-primary scale-110' : 'text-gray-400'
+                  }`}>
                   {item.icon}
                 </div>
-                <span className={`text-[10px] font-black tracking-widest transition-all duration-300 ${
-                  isActive ? 'text-brand-primary' : 'text-gray-400'
-                } mt-1`}>
+                <span className={`text-[10px] font-black tracking-widest transition-all duration-300 ${isActive ? 'text-brand-primary' : 'text-gray-400'
+                  } mt-1`}>
                   {item.name}
                 </span>
                 {isActive && (
-                  <motion.div 
+                  <motion.div
                     layoutId="navIndicator"
                     className="absolute top-0 left-0 right-0 h-[3px] bg-brand-primary shadow-[0_0_15px_rgba(228,161,1,0.5)]"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
@@ -101,7 +98,7 @@ export default function Navbar() {
       </nav>
 
       {/* Desktop Top Navigation */}
-      <nav 
+      <nav
         className={`fixed left-0 w-full z-[100] transition-all duration-500 hidden sm:block
           top-0 ${scrolled ? 'bg-brand-dark/95 backdrop-blur-xl shadow-xl' : 'bg-brand-dark'}
         `}
@@ -109,9 +106,9 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex justify-between items-center h-20 relative">
             {/* DESKTOP LOGO */}
-            <div 
-              className="flex items-center gap-3 cursor-pointer group" 
-              onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
+            <div
+              className="flex items-center gap-3 cursor-pointer group"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               <div className="w-10 h-10 bg-brand-primary rounded-xl flex items-center justify-center text-brand-dark font-black text-xl group-hover:rotate-6 transition-transform">
                 Y
@@ -132,13 +129,12 @@ export default function Navbar() {
                     onClick={(e) => handleScrollTo(e, item.id)}
                     className="relative flex flex-col items-center justify-center h-full group"
                   >
-                    <span className={`text-xs font-black uppercase tracking-widest transition-all duration-300 ${
-                      isActive ? 'text-brand-primary' : 'text-gray-400 group-hover:text-white'
-                    }`}>
+                    <span className={`text-xs font-black uppercase tracking-widest transition-all duration-300 ${isActive ? 'text-brand-primary' : 'text-gray-400 group-hover:text-white'
+                      }`}>
                       {item.name}
                     </span>
                     {isActive && (
-                      <motion.div 
+                      <motion.div
                         layoutId="navIndicatorDesktop"
                         className="absolute bottom-0 left-0 right-0 h-[3px] bg-brand-primary shadow-[0_0_15px_rgba(228,161,1,0.5)]"
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
@@ -150,8 +146,8 @@ export default function Navbar() {
             </div>
 
             {/* DESKTOP BUTTON */}
-            <button 
-              onClick={(e) => handleScrollTo(e as any, 'contact')} 
+            <button
+              onClick={(e) => handleScrollTo(e as any, 'contact')}
               className="bg-brand-primary text-brand-dark px-7 py-2.5 rounded-full font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-transform"
             >
               Contact Me

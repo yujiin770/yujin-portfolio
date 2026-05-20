@@ -1,9 +1,11 @@
+// src/App.tsx
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import SplashScreen from './sections/SplashScreen';
 import Hero from './sections/Hero';
 import About from './sections/about';
 import TechStack from './sections/TechStack';
+import Projects from './sections/Projects';
 import MobileHeader from './components/MobileHeader';
 import Navbar from './components/Navbar';
 
@@ -24,6 +26,7 @@ function App() {
               <Hero />
               <About />
               <TechStack />
+              <Projects />
             </main>
           </div>
         )}
