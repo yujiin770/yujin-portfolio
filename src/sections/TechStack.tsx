@@ -2,7 +2,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { 
   SiReact, SiTypescript, SiTailwindcss, SiVuedotjs, 
-  SiNodedotjs, SiPhp, SiCplusplus, SiDotnet,
+  SiNodedotjs, SiPhp, SiDotnet,
   SiSupabase, SiGraphql, SiMysql
 } from 'react-icons/si';
 import { TbBrandCpp } from 'react-icons/tb';
