@@ -10,6 +10,7 @@ import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 import MobileHeader from './components/MobileHeader';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -24,13 +25,14 @@ function App() {
         ) : (
           <div key="content" className="relative">
             <MobileHeader />
-            <Navbar />        
+            <Navbar />
             <main>
               <Hero />
               <About />
               <TechStack />
               <Projects />
               <Contact />
+              <Footer />
             </main>
           </div>
         )}

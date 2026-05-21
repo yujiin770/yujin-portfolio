@@ -63,7 +63,7 @@ const About = () => {
 
               <div className="pt-8">
                 <button className="bg-brand-dark text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-brand-dark/10">
-                  Check My Resume
+                  Check My CV
                 </button>
               </div>
             </motion.div>
