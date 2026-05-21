@@ -1,13 +1,13 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { 
-  SiReact, SiTypescript, SiTailwindcss, SiVuedotjs, 
+import {
+  SiReact, SiTypescript, SiTailwindcss, SiVuedotjs,
   SiNodedotjs, SiPhp, SiDotnet,
   SiSupabase, SiGraphql, SiMysql
 } from 'react-icons/si';
 import { TbBrandCpp } from 'react-icons/tb';
-import { 
-  SiGit, SiGithub, SiFirebase, SiVite, SiWebpack, SiJest 
+import {
+  SiGit, SiGithub, SiFirebase, SiVite, SiWebpack, SiJest
 } from 'react-icons/si';
 import { TbApi, TbLock } from 'react-icons/tb';
 
@@ -86,20 +86,20 @@ const TechStack = () => {
             className="inline-block mb-4"
           >
             <span className="bg-brand-primary/10 text-brand-primary px-6 py-3 rounded-full text-sm font-black tracking-wider">
-              ⚡ TECH STACK & SKILLS
+              TECH STACK & SKILLS
             </span>
           </motion.div>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3 }}
             className="text-4xl md:text-6xl font-black text-brand-dark mb-4"
           >
-            Technologies I{' '}
+            My Tech{' '}
             <span className="text-brand-primary relative inline-block">
-              Master
-              <motion.div 
+              Stacks
+              <motion.div
                 initial={{ scaleX: 0 }}
                 animate={isInView ? { scaleX: 1 } : {}}
                 transition={{ delay: 0.8, duration: 0.5 }}
@@ -107,8 +107,8 @@ const TechStack = () => {
               />
             </span>
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4 }}
@@ -130,10 +130,10 @@ const TechStack = () => {
               className="relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/10 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-              
+
               <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-300 h-full">
                 {/* Category Header */}
-                <motion.div 
+                <motion.div
                   className="flex items-center gap-3 mb-8 pb-4 border-b-2 border-brand-primary/20"
                   whileHover={{ x: 10 }}
                   transition={{ type: "spring", stiffness: 300 }}
@@ -161,7 +161,7 @@ const TechStack = () => {
                       onHoverEnd={() => setHoveredCard(null)}
                       className="relative cursor-pointer"
                     >
-                      <div 
+                      <div
                         className="bg-gradient-to-r from-gray-50 to-white rounded-xl p-4 hover:shadow-lg transition-all duration-300 border border-gray-50 hover:border-brand-primary/20"
                         style={{
                           boxShadow: hoveredCard === skill.name ? `0 0 20px ${skill.color}20` : 'none'
@@ -169,7 +169,7 @@ const TechStack = () => {
                       >
                         <div className="flex items-center gap-4">
                           <motion.div
-                            animate={{ 
+                            animate={{
                               rotate: hoveredCard === skill.name ? [0, 10, -10, 0] : 0,
                               scale: hoveredCard === skill.name ? 1.2 : 1
                             }}
@@ -180,7 +180,7 @@ const TechStack = () => {
                             {skill.icon}
                           </motion.div>
                           <span className="font-bold text-brand-dark text-lg">{skill.name}</span>
-                          
+
                           {/* Hover Glow Effect */}
                           {hoveredCard === skill.name && (
                             <motion.div
@@ -211,7 +211,7 @@ const TechStack = () => {
           <div className="text-center mb-8">
             <span className="text-brand-primary font-black text-sm uppercase tracking-wider">✨ Always Learning ✨</span>
           </div>
-          
+
           {/* Mobile: Infinite Scroll Marquee */}
           <div className="block md:hidden overflow-hidden relative">
             <motion.div

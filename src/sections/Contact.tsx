@@ -160,8 +160,7 @@ export default function Contact() {
               <h3 className="text-2xl font-black text-brand-dark mb-6 flex items-center gap-2">
                 <Mail className="text-brand-primary" />
                 Contact Info
-              </h3>
-              
+              </h3> 
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.a
