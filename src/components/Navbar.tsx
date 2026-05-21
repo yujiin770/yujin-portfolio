@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Home, User, Briefcase, Mail, Code } from 'lucide-react';
 
@@ -13,9 +13,13 @@ const navItems = [
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
   const [scrolled, setScrolled] = useState(false);
+  const isScrollingRef = useRef(false);
 
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
+    isScrollingRef.current = true;
+    setActiveSection(id);
+    
     if (id === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -31,35 +35,63 @@ export default function Navbar() {
         });
       }
     }
+    
+    // Reset scrolling flag after animation completes
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 1000);
   };
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '-40% 0px -40% 0px',  // Adjusted from 40% to be more sensitive
-      threshold: 0.1 // Increased threshold slightly
-    };
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        // entry.isIntersecting check
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      
+      // Don't update active section while programmatically scrolling
+      if (isScrollingRef.current) return;
+      
+      // Get all sections
+      const sections = ['home', 'about', 'tech', 'work', 'contact'];
+      
+      // Find which section is currently most visible
+      let currentSection = '';
+      let maxVisibility = 0;
+      
+      sections.forEach((sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const viewportHeight = window.innerHeight;
+          
+          // Calculate how much of the section is visible (as a percentage)
+          const visibleTop = Math.max(0, rect.top);
+          const visibleBottom = Math.min(viewportHeight, rect.bottom);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+          const visibilityPercentage = visibleHeight / rect.height;
+          
+          // Also check if the section's top is near the top of viewport (for large sections)
+          const distanceFromTop = Math.abs(rect.top - 100); // 100px offset for navbar
+          const proximityScore = Math.max(0, 1 - distanceFromTop / 500);
+          
+          // Combined score
+          const score = visibilityPercentage * 0.7 + proximityScore * 0.3;
+          
+          if (score > maxVisibility) {
+            maxVisibility = score;
+            currentSection = sectionId;
+          }
         }
       });
+      
+      if (currentSection && maxVisibility > 0.1) {
+        setActiveSection(currentSection);
+      }
     };
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    navItems.forEach((item) => {
-      const el = document.getElementById(item.id);
-      if (el) observer.observe(el);
-    });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      observer.disconnect();
-    };
+    
+    window.addEventListener('scroll', handleScroll);
+    // Initial call to set active section on page load
+    handleScroll();
+    
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (

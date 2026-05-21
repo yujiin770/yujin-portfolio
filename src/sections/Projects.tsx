@@ -43,7 +43,7 @@ export default function Projects() {
   return (
     // ID "work" must be on this section tag for the Navbar to see it
     <section
-      id="work"
+      id="work"  // ✅ This must match 'work' in NavItems
       className="py-24 bg-brand-dark text-white w-screen overflow-hidden relative left-[50%] right-[50%] ml-[-50vw] mr-[-50vw]"
     >
 
