@@ -1,11 +1,11 @@
-// Create src/sections/Contact.tsx
+// src/sections/Contact.tsx
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Send, Mail, Phone, MapPin, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 // Import from react-icons
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
-import { SiGmail } from 'react-icons/si';
+// Remove SiGmail since it's not used
 
 export default function Contact() {
   const sectionRef = useRef(null);
