@@ -24,8 +24,7 @@ function App() {
         ) : (
           <div key="content" className="relative">
             <MobileHeader />
-            <Navbar />
-            
+            <Navbar />        
             <main>
               <Hero />
               <About />
@@ -33,8 +32,6 @@ function App() {
               <Projects />
               <Contact />
             </main>
-            
-            <Footer /> {/* Add Footer here */}
           </div>
         )}
       </AnimatePresence>
