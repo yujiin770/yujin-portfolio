@@ -1,26 +1,58 @@
-import { motion } from 'framer-motion';
+// src/components/MobileHeader.tsx
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { useState } from 'react';
 
 export default function MobileHeader() {
+  const [isVersion, setIsVersion] = useState(false);
+  const { scrollYProgress } = useScroll();
+  
+  // Spring physics for the progress bar at the bottom of header
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
     <motion.div 
-      initial={{ y: -50, opacity: 0 }}
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="fixed top-0 left-0 w-full z-[90] sm:hidden flex justify-between items-center px-6 py-4 bg-brand-bg/80 backdrop-blur-md"
+      className="fixed top-0 left-0 w-full z-[100] sm:hidden flex justify-between items-center px-6 h-14 bg-brand-bg/60 backdrop-blur-xl border-b border-gray-100"
     >
-      <div className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-brand-dark rounded-lg flex items-center justify-center text-brand-primary font-black text-sm">
-          Y
-        </div>
-        <span className="text-brand-dark font-black tracking-tighter text-sm italic">
-          YUJIN<span className="text-brand-primary">.</span>
+      {/* INTERACTIVE BRANDING - Toggles name on tap */}
+      <motion.div 
+        whileTap={{ scale: 0.95 }}
+        onClick={() => setIsVersion(!isVersion)}
+        className="cursor-pointer"
+      >
+        <span className="text-brand-dark font-black tracking-tighter text-sm uppercase flex items-center gap-1.5">
+          {isVersion ? (
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-brand-primary">
+              VER_2.1.0
+            </motion.span>
+          ) : (
+            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              YUJIN<span className="text-brand-primary italic">.ALMIRA</span>
+            </motion.span>
+          )}
+        </span>
+      </motion.div>
+      
+      {/* MINIMAL INTERACTIVE COUNTER (Fake "Session Data") */}
+      <div className="flex flex-col items-end">
+        <span className="text-[7px] font-bold text-gray-400 tracking-[0.3em] uppercase mb-0.5">
+          SESS_ID
+        </span>
+        <span className="text-[10px] font-mono text-brand-dark/60 font-black">
+          #404X7F
         </span>
       </div>
-      
-      {/* Small "Status" indicator for a pro look */}
-      <div className="flex items-center gap-2 bg-brand-primary/10 px-3 py-1 rounded-full">
-        <span className="w-1.5 h-1.5 bg-brand-primary rounded-full animate-pulse" />
-        <span className="text-[10px] font-black text-brand-primary uppercase tracking-widest">Online</span>
-      </div>
+
+      {/* PROGRESS BAR - Border that tracks your scroll depth */}
+      <motion.div 
+        className="absolute bottom-[-1px] left-0 right-0 h-[2px] bg-brand-primary origin-left shadow-[0_0_8px_rgba(228,161,1,0.5)]"
+        style={{ scaleX }}
+      />
     </motion.div>
   );
 }

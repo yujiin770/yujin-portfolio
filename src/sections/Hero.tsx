@@ -14,7 +14,7 @@ const Hero = () => {
             initial={{ scale: 0, rotate: -20 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 50, delay: 0.4 }}
-            className="absolute w-[300px] h-[300px] sm:w-[450px] sm:h-[450px] lg:w-[580px] lg:h-[580px] bg-brand-primary z-0 shadow-2xl"
+            className="absolute w-[200px] h-[300px] sm:w-[450px] sm:h-[450px] lg:w-[500px] lg:h-[580px] bg-brand-primary z-0 shadow-2xl"
             style={{ borderRadius: "40% 60% 70% 30% / 40% 50% 60% 70%" }}
           />
 
@@ -39,7 +39,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl md:text-8xl lg:text-[100px] font-black text-brand-dark leading-[0.9] mb-6"
           >
-            I'm <span className="text-brand-primary italic">Yujin</span> <br /> 
+            <span className="text-brand-primary italic">Eugene</span> <br /> 
             Almira<span className="text-brand-primary">.</span>
           </motion.h1>
 
@@ -59,7 +59,7 @@ const Hero = () => {
             className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
           >
             {/* VIEW PORTFOLIO */}
-            <button className="w-full sm:w-auto group bg-brand-dark hover:bg-black text-white pl-8 pr-3 py-3 rounded-full flex items-center justify-between sm:justify-start gap-6 font-bold transition-all shadow-xl h-14 sm:h-16">
+            <button className="w-full sm:w-auto group bg-brand-dark hover:bg-black text-white pl-8 pr-3 py-3 rounded-full flex items-center justify-center sm:justify-start gap-6 font-bold transition-all shadow-xl h-14 sm:h-16">
               View My Work
               <div className="bg-brand-primary p-2.5 rounded-full group-hover:rotate-45 transition-transform">
                 <ArrowUpRight size={20} className="text-brand-dark" />
